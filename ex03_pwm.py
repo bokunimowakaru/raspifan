@@ -55,24 +55,16 @@ pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan
 　～～～～～～～～～～～～～～～～～～(省略)～～～～～～～～～～～～～～～～～
 pi@raspberrypi:~ $ cd raspifan
 pi@raspberrypi:~/raspifan $ ./ex03_pwm.py
-Temperature = 55.0
-PWM(14)= 50
-Temperature = 55.0
-PWM(14)= 50
-Temperature = 54.5
-PWM(14)= 45
-Temperature = 55.5
-PWM(14)= 55
-Temperature = 54.5
-PWM(14)= 45
-Temperature = 55.5
-PWM(14)= 55
-Temperature = 56.0
-PWM(14)= 60
-Temperature = 54.5
-PWM(14)= 45
-Temperature = 55.0
-PWM(14)= 50
+Temperature = 59.3, PWM(14)= 100
+Temperature = 58.0, PWM(14)= 100
+Temperature = 56.8, PWM(14)= 84
+Temperature = 55.8, PWM(14)= 53
+Temperature = 54.8, PWM(14)= 25
+Temperature = 55.0, PWM(14)= 30
+Temperature = 55.6, PWM(14)= 47
+Temperature = 55.2, PWM(14)= 35
+Temperature = 54.8, PWM(14)= 25
+Temperature = 55.0, PWM(14)= 29
 ^C
 KeyboardInterrupt
 pi@raspberrypi:~/raspifan $
