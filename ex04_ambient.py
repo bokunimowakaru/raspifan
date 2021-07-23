@@ -29,8 +29,6 @@ import urllib.request                           # HTTP通信ライブラリを�
 import json                                     # JSON変換ライブラリを組み込む
 
 def sendToAmbient(ambient_chid, head_dict, body_dict):
-    print('\nto Ambient:')
-    print('    body',body_dict)                 # 送信内容body_dictを表示
     if int(ambient_chid) != 0:
         post = urllib.request.Request(\
             url_s, json.dumps(body_dict).encode(), head_dict\
@@ -42,17 +40,13 @@ def sendToAmbient(ambient_chid, head_dict, body_dict):
             return
         res_str = res.read().decode()           # 受信テキストを変数res_strへ
         res.close()                             # HTTPアクセスの終了
-        if len(res_str):                        # 受信テキストがあれば
-            print('    Response:', res_str)     # 変数res_strの内容を表示
-        else:
-            print('    Done')                   # Doneを表示
     else:
         print('    チャネルID(ambient_chid)が設定されていません')
 
 filename = '/sys/class/thermal/thermal_zone0/temp' # 温度値が書かれたファイル
 url_s = 'https://ambidata.io/api/v2/channels/'+ambient_chid+'/data' # アクセス先
 head_dict = {'Content-Type':'application/json'} # ヘッダを変数head_dictへ
-body_dict = {'writeKey':ambient_wkey, 'd1':None,'d2':None,'d3':None,'d4':None}
+body_dict = {'writeKey':ambient_wkey, 'd1':None,'d2':None}
 duty = 0                                        # PWM制御値(Duty比) 0～100
 
 try:                                            # キー割り込みの監視を開始
@@ -72,12 +66,11 @@ try:                                            # キー割り込みの監視を
         duty = duty_min                         # PWM Duty(ファン速度)を最小値
     elif duty > 100:                            # 最大ファン速度を超過
         duty = 100                              # PWM Duty(ファン速度)を100に
-    print('PWM('+str(port)+')=', str(duty))     # ポート番号と変数dutyの値を表示
+    print('PWM('+str(port)+')=', str(duty), end=', ')   # 変数dutyの値を表示
     pwm.ChangeDutyCycle(duty)                   # 変数dutyの値をGPIO出力
     body_dict['d1'] = temp                      # 項目d1にCPU温度値tempを代入
     body_dict['d2'] = duty                      # 項目d2に制御値dutyを代入
-    body_dict['d3'] = accele                    # d3に制御応答度acceleを代入
-    body_dict['d4'] = velocity                  # d4に制御基準値値velocityを代入
+    print(body_dict)                            # 送信内容body_dictを表示
     sendToAmbient(ambient_chid, head_dict, body_dict)   # Ambientへ送信
 except KeyboardInterrupt:                       # キー割り込み発生時
     print('\nKeyboardInterrupt')                # キーボード割り込み表示
@@ -88,17 +81,12 @@ except KeyboardInterrupt:                       # キー割り込み発生時
 pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan
 　～～～～～～～～～～～～～～～～～～(省略)～～～～～～～～～～～～～～～～～
 pi@raspberrypi:~ $ cd raspifan
-pi@raspberrypi:~/raspifan $ ./ex04_ambiet.py
-Temperature = 59.3, PWM(14)= 100
-Temperature = 58.0, PWM(14)= 100
-Temperature = 56.8, PWM(14)= 84
-Temperature = 55.8, PWM(14)= 53
-Temperature = 54.8, PWM(14)= 25
-Temperature = 55.0, PWM(14)= 30
-Temperature = 55.6, PWM(14)= 47
-Temperature = 55.2, PWM(14)= 35
-Temperature = 54.8, PWM(14)= 25
-Temperature = 55.0, PWM(14)= 29
+pi@raspberrypi:~/raspifan $ ./ex04_ambient.py
+Temperature = 58.0, PWM(14)= 100, {'writeKey': '3209ffa1xxxxxxxx', 'd1': 58.00393333333332, 'd2': 100}
+Temperature = 57.3, PWM(14)= 100, {'writeKey': '3209ffa1xxxxxxxx', 'd1': 57.27343333333333, 'd2': 100}
+Temperature = 55.3, PWM(14)= 45, {'writeKey': '3209ffa1xxxxxxxx', 'd1': 55.29296666666666, 'd2': 45}
+Temperature = 54.4, PWM(14)= 25, {'writeKey': '3209ffa1xxxxxxxx', 'd1': 54.44883333333332, 'd2': 25}
+Temperature = 54.8, PWM(14)= 27, {'writeKey': '3209ffa1xxxxxxxx', 'd1': 54.77350000000001, 'd2': 27}
 ^C
 KeyboardInterrupt
 pi@raspberrypi:~/raspifan $

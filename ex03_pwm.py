@@ -6,12 +6,12 @@
 #                         Copyright (c) 2021 Wataru KUNINO https://bokunimo.net
 ###############################################################################
 
-# CPU温度が60℃以上でFANを回転、55℃以下で停止するファンの自動制御を行います
+# CPU温度が55℃以下に抑えるようにファン速度をPWMで調整します。
 # 終了するには[Ctrl]キーを押しながら[C]を押してください。
 
 port = 14                                       # GPIO ポート番号 = 14 (8番ピン)
 temp_target = 55                                # ファンをOFFにする温度(℃)
-Accele = 30                                     # 温度1℃あたりのファン速度
+accele = 30                                     # 温度1℃あたりのファン速度
 velocity = 30                                   # 平衡時のファン速度
 duty_min = 25                                   # 最小Duty(ファン動作可能電圧)
 period = 15                                     # 制御間隔(秒)
@@ -21,21 +21,21 @@ from time import sleep                          # スリープ実行モジュー
 GPIO.setmode(GPIO.BCM)                          # ポート番号の指定方法の設定
 GPIO.setup(port, GPIO.OUT)                      # ポートportのGPIOを出力に設定
 pwm = GPIO.PWM(port, 50)                        # 50Hzを設定
-pwm.start(0)
+pwm.start(0)                                    # PWM出力 0% (Lレベル)
 
 filename = '/sys/class/thermal/thermal_zone0/temp' # 温度値が書かれたファイル
 duty = 0                                        # PWM制御値(Duty比) 0～100
 try:                                            # キー割り込みの監視を開始
     while True:                                 # 繰り返し処理
-        temp = 0
-        for i in range(period):
+        temp = 0                                # 温度を保持する変数tempを生成
+        for i in range(period):                 # 繰り返し処理(回数=period)
             fp = open(filename)                 # 温度ファイルを開く
             temp += float(fp.read()) / 1000     # ファイルを読み込み1000で除算
             fp.close()                          # ファイルを閉じる
             sleep(1)                            # 1秒間の待ち時間処理
-        temp /= period                          # 
+        temp /= period                          # 平均値を算出
         print('Temperature =', round(temp,1), end=', ') # 温度を表示する
-        duty = (temp - temp_target) * Accele + velocity # 出力dutyを算出
+        duty = (temp - temp_target) * accele + velocity # 出力dutyを算出
         duty = round(duty)                      # 変数dutyの値を整数に丸める
         if duty <= 0:                           # 目標以下なので冷却不要
             duty = 0                            # PWM Duty(ファン速度)を0に
