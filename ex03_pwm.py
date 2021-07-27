@@ -9,10 +9,13 @@
 # CPU温度が55℃以下に抑えるようにファン速度をPWMで調整します。
 # 終了するには[Ctrl]キーを押しながら[C]を押してください。
 
+# /etc/rc.localに下記を追加するとRaspberry Piの起動時に自動実行できます
+# nohup /home/pi/ex03_pwm.py &> /dev/null &
+
 port = 14                                       # GPIO ポート番号 = 14 (8番ピン)
 temp_target = 55                                # ファンをOFFにする温度(℃)
-accele = 30                                     # 温度1℃あたりのファン速度
-velocity = 30                                   # 平衡時のファン速度
+accele = 25                                     # 温度1℃あたりのファン速度
+velocity = 25                                   # 平衡時のファン速度
 duty_min = 25                                   # 最小Duty(ファン動作可能電圧)
 period = 15                                     # 制御間隔(秒)
 
