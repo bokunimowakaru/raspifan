@@ -53,7 +53,7 @@ def udp_sender(udp):
   if savedata:
     if udp[5] == '_' and udp[7] == ',':
       save(udp[0:7] + '.csv', udp[7:])
-  if sendupd = False:
+  if sendupd == False:
     return
   if udp_port <= 0:
     return
@@ -71,20 +71,19 @@ def udp_sender(udp):
     sock.close()                                        # ソケットの切断
 
 def udp_sender_sensor(body_dict):
-  if sendupd:
-    d1 = body_dict.get('d1')
-    d2 = body_dict.get('d2')
-    d3 = body_dict.get('d3')
-    d4 = body_dict.get('d4')
-    d5 = body_dict.get('d5')
-    udp_sender(\
-      'pufan_' + udp_suffix + ','\
-      + str(round(d1,2)) + ' ,'\
-      + str(d2) + ' ,'\
-      + str(d3) + ' ,'\
-      + str(d4) + ' ,'\
-      + str(d5)\
-    )
+  d1 = body_dict.get('d1')
+  d2 = body_dict.get('d2')
+  d3 = body_dict.get('d3')
+  d4 = body_dict.get('d4')
+  d5 = body_dict.get('d5')
+  udp_sender(\
+    'pufan_' + udp_suffix + ','\
+    + str(round(d1,2)) + ' ,'\
+    + str(d2) + ' ,'\
+    + str(d3) + ' ,'\
+    + str(d4) + ' ,'\
+    + str(d5)\
+  )
 
 def sendToAmbient(ambient_chid, head_dict, body_dict):
   print('\nto Ambient:')
@@ -158,6 +157,8 @@ def target_temp(target):
     raise e
 
 try:                                            # キー割り込みの監視を開始
+  for i in range(6):
+    target_temp(70)
   for velocity in velocity_list:
     for accele in accele_list:
       target_temp(68)
@@ -191,7 +192,8 @@ try:                                            # キー割り込みの監視を
 
 except KeyboardInterrupt:                       # キー割り込み発生時
   print('\nKeyboardInterrupt')                  # キーボード割り込み表示
-GPIO.cleanup(port)                              # GPIOを未使用状態に戻す
+  GPIO.cleanup(port)                            # GPIOを未使用状態に戻す
+  exit()
 
 try:                                            # キー割り込みの監視を開始
   while True:
@@ -201,6 +203,5 @@ try:                                            # キー割り込みの監視を
 except KeyboardInterrupt:                       # キー割り込み発生時
   print('\nKeyboardInterrupt')                  # キーボード割り込み表示
   GPIO.cleanup(port)                            # GPIOを未使用状態に戻す
-
-exit()                                          # 終了
+  exit()                                        # 終了
 
