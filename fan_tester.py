@@ -190,12 +190,6 @@ try:                                            # キー割り込みの監視を
         udp_sender_sensor(body_dict)
         sendToAmbient(ambient_chid, head_dict, body_dict)
 
-except KeyboardInterrupt:                       # キー割り込み発生時
-  print('\nKeyboardInterrupt')                  # キーボード割り込み表示
-  GPIO.cleanup(port)                            # GPIOを未使用状態に戻す
-  exit()
-
-try:                                            # キー割り込みの監視を開始
   while True:
     pwm.ChangeDutyCycle(50)
     sleep(60)
