@@ -3,18 +3,18 @@
 ###############################################################################
 # Example 3 FAN PWM Control
 #
-#                         Copyright (c) 2021 Wataru KUNINO https://bokunimo.net
+#                        Copyright (c) 2021 Wataru KUNINO https://bokunimo.net/
 ###############################################################################
 
 # CPU温度が55℃以下に抑えるようにファン速度をPWMで調整します。
 # 終了するには[Ctrl]キーを押しながら[C]を押してください。
 
 # /etc/rc.localに下記を追加するとRaspberry Piの起動時に自動実行できます
-# nohup /home/pi/ex03_pwm.py &> /dev/null &
+# nohup /home/pi/raspifan/ex03_pwm.py &> /dev/null &
 
 port = 14                                       # GPIO ポート番号 = 14 (8番ピン)
 temp_target = 55                                # ファンをOFFにする温度(℃)
-accele = 25                                     # 温度1℃あたりのファン速度
+accele = 35                                     # 温度1℃あたりのファン速度
 velocity = 25                                   # 平衡時のファン速度
 duty_min = 25                                   # 最小Duty(ファン動作可能電圧)
 period = 15                                     # 制御間隔(秒)
@@ -54,10 +54,10 @@ except KeyboardInterrupt:                       # キー割り込み発生時
     exit()                                      # 終了
 
 '''
-pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan
+pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan ⏎
 　～～～～～～～～～～～～～～～～～～(省略)～～～～～～～～～～～～～～～～～
-pi@raspberrypi:~ $ cd raspifan
-pi@raspberrypi:~/raspifan $ ./ex03_pwm.py
+pi@raspberrypi:~ $ cd raspifan ⏎
+pi@raspberrypi:~/raspifan $ ./ex03_pwm.py ⏎
 Temperature = 59.3, PWM(14)= 100
 Temperature = 58.0, PWM(14)= 100
 Temperature = 56.8, PWM(14)= 84

@@ -3,7 +3,7 @@
 ###############################################################################
 # Example 4 Temperature to Ambient
 #
-#                         Copyright (c) 2021 Wataru KUNINO https://bokunimo.net
+#                        Copyright (c) 2021 Wataru KUNINO https://bokunimo.net/
 ###############################################################################
 
 # CPU温度の制御の様子をセンサ値のグラフ化サイト Ambient へ送信します。
@@ -13,8 +13,8 @@ ambient_chid='00000'            # ここにAmbientで取得したチャネルID�
 ambient_wkey='0123456789abcdef' # ここにはライトキーを入力
 port = 14                                       # GPIO ポート番号 = 14 (8番ピン)
 temp_target = 55                                # ファンをOFFにする温度(℃)
-accele = 30                                     # 温度1℃あたりのファン速度
-velocity = 30                                   # 平衡時のファン速度
+accele = 35                                     # 温度1℃あたりのファン速度
+velocity = 25                                   # 平衡時のファン速度
 duty_min = 25                                   # 最小Duty(ファン動作可能電圧)
 period = 30                                     # 制御間隔(秒) ※30秒以上
 
@@ -78,10 +78,10 @@ except KeyboardInterrupt:                       # キー割り込み発生時
     exit()                                      # 終了
 
 '''
-pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan
+pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan ⏎
 　～～～～～～～～～～～～～～～～～～(省略)～～～～～～～～～～～～～～～～～
-pi@raspberrypi:~ $ cd raspifan
-pi@raspberrypi:~/raspifan $ ./ex04_ambient.py
+pi@raspberrypi:~ $ cd raspifan ⏎
+pi@raspberrypi:~/raspifan $ ./ex04_ambient.py ⏎
 Temperature = 58.0, PWM(14)= 100, {'writeKey': '3209ffa1xxxxxxxx', 'd1': 58.00393333333332, 'd2': 100}
 Temperature = 57.3, PWM(14)= 100, {'writeKey': '3209ffa1xxxxxxxx', 'd1': 57.27343333333333, 'd2': 100}
 Temperature = 55.3, PWM(14)= 45, {'writeKey': '3209ffa1xxxxxxxx', 'd1': 55.29296666666666, 'd2': 45}

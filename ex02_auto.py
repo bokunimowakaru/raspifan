@@ -3,7 +3,7 @@
 ###############################################################################
 # Example 2 FAN AUTO ON/OFF
 #
-#                         Copyright (c) 2021 Wataru KUNINO https://bokunimo.net
+#                        Copyright (c) 2021 Wataru KUNINO https://bokunimo.net/
 ###############################################################################
 
 # CPU温度が60℃以上でFANを回転、55℃以下で停止するファンの自動制御を行います
@@ -39,10 +39,10 @@ except KeyboardInterrupt:                       # キー割り込み発生時
     exit()                                      # 終了
 
 '''
-pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan
+pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan ⏎
 　～～～～～～～～～～～～～～～～～～(省略)～～～～～～～～～～～～～～～～～
-pi@raspberrypi:~ $ cd raspifan
-pi@raspberrypi:~/raspifan $ ./ex02_auto.py
+pi@raspberrypi:~ $ cd raspifan ⏎
+pi@raspberrypi:~/raspifan $ ./ex02_auto.py ⏎
 Temperature = 52.6, GPIO14 = 0
 Temperature = 53.1, GPIO14 = 0
 Temperature = 54.0, GPIO14 = 0
