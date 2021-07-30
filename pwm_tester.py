@@ -40,9 +40,9 @@ pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan ⏎
 pi@raspberrypi:~ $ cd raspifan ⏎
 pi@raspberrypi:~/raspifan $ ./pwm_tester.py ⏎
 PWM(14)= 0
-fan > 20
+fan > 20 ⏎
 PWM(14)= 20
-fan > 100
+fan > 100 ⏎
 PWM(14)= 100
 fan > ^C
 KeyboardInterrupt
