@@ -14,7 +14,7 @@
 # 終了するには[Ctrl]キーを押しながら[C]を押してください。
 
 port = 14                                       # GPIO ポート番号=14 (8番ピン)
-velocity = 180. / 0.36 / 4                      # 最大回転速度(°/秒)の半分
+velocity = 180. / 0.36 / 2                      # 最大回転速度(°/秒)の半分
 duty_min = 2.7                                  # 180°のときのPWMのDuty比
 duty_max = 13.0                                 # 0°のときのPWMのDuty比
 delta = (duty_max - duty_min) * velocity / 50 / 180 # 1サイクル当たりの回転角
