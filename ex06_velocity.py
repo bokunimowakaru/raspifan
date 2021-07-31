@@ -43,7 +43,7 @@ try:                                            # キー割り込みの監視を
         val = int(val_s)                        # 整数値をvalに代入
         if val < 0 or val > 180:                # 0〜180の範囲外のとき
             continue                            # whileの先頭に戻る
-        target = deg2duty(val)                  # 角度値をデューティに変換
+        target = round(deg2duty(val),1)         # 角度値をデューティに変換
         v_sign = (target > duty)-(target < duty) # 目標の大小を符号に変換
         while True:                             # PWM出力を行うループ
             duty += v_sign * delta              # 変数dutyに回転角分を加減算
@@ -64,12 +64,13 @@ except (KeyboardInterrupt,EOFError):            # キー割り込み発生時
 pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan ⏎
 　～～～～～～～～～～～～～～～～～～(省略)～～～～～～～～～～～～～～～～～
 pi@raspberrypi:~ $ cd raspifan ⏎
-pi@raspberrypi:~/raspifan $ ./pwm_tester.py ⏎
-PWM(14)= 0
-servo > 20 ⏎
-PWM(14)= 20
-servo > 100 ⏎
-PWM(14)= 100
+pi@raspberrypi:~/raspifan $ ./ex06_velocity.py ⏎
+servo > 0 ⏎
+PWM(14)= 13.0
+servo > 90 ⏎
+PWM(14)= 7.9
+servo > 180 ⏎
+PWM(14)= 2.7
 servo > ^C
 KeyboardInterrupt
 pi@raspberrypi:~/raspifan $
