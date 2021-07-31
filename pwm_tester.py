@@ -22,12 +22,14 @@ try:                                            # キー割り込みの監視を
     while True:                                 # 繰り返し処理
         print('PWM('+str(port)+')=', str(duty)) # ポート番号と変数dutyの値を表示
         pwm.ChangeDutyCycle(duty)               # 変数dutyの値をGPIO出力
-        print('fan',end=' > ');                 # キーボード入力待ち表示
+        print('duty',end=' > ');                # キーボード入力待ち表示
         val_s =input()                          # キーボードから入力
-        if len(val_s) > 0 and val_s.isdigit():  # 入力が数字のとき
-            val = int(val_s)                    # 整数値をvalに代入
-            if val >= 0 and val <= 100:         # 0〜100の範囲内のとき
-                duty = val
+        try:
+            val = float(val_s)                  # 数値に変換してvalに代入
+        except ValueError:
+            continue
+        if val >= 0 and val <= 100:             # 0〜100の範囲内のとき
+            duty = val
 
 except (KeyboardInterrupt,EOFError):            # キー割り込み発生時
     print('\nKeyboardInterrupt')                # キーボード割り込み表示
