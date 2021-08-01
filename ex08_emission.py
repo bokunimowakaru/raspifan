@@ -3,7 +3,7 @@
 ###############################################################################
 # Example 8 Heat Dissipation Mechanism for Raspberry Pi
 #
-#                         Copyright (c) 2021 Wataru KUNINO https://bokunimo.net
+#                        Copyright (c) 2021 Wataru KUNINO https://bokunimo.net/
 ###############################################################################
 
 # ラズベリー・パイのCPU温度が60℃を超えたときに Tower Pro製 マイクロ・サーボ
