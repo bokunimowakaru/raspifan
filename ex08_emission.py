@@ -163,7 +163,8 @@ CPU Temperature = 57.5
 　～～～～～～～～～～～～ (CPU温度が60℃に達した時)～～～～～～～～～～～～～
 CPU Temperature = 59.1
 CPU Temperature = 58.5
-CPU Temperature = 59.6CPU Temperature = 60.1
+CPU Temperature = 59.6
+CPU Temperature = 60.1
 coverCtrl : 150 -> 90
 ^C
 KeyboardInterrupt
