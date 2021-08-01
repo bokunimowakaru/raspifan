@@ -3,7 +3,7 @@
 ###############################################################################
 # Example 5 Servo PWM Control
 #
-#                         Copyright (c) 2021 Wataru KUNINO https://bokunimo.net
+#                        Copyright (c) 2021 Wataru KUNINO https://bokunimo.net/
 ###############################################################################
 
 # ラズベリー・パイに接続した Tower Pro製 マイクロ・サーボモータSG90を
