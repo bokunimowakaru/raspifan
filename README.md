@@ -28,10 +28,10 @@ Tower Pro製 マイクロ・サーボモータSG90をキーボードから入力
 CPU温度が60℃を超えたときに サーボモータを制御し、ケースの上蓋を開いて排熱します。
 また、インターネット・ブラウザ等から開閉制御を行うことも出来ます。  
 
-本ドキュメントの保存先：  
+- 本ドキュメントの保存先：
 	https://bokunimo.net/git/raspifan/  
 
-ダウンロード方法：  
+- ダウンロード方法：
 	git clone https://bokunimo.net/git/raspifan  
 
 Copyright (c) 2021 Wataru KUNINO https://bokunimo.net/  
