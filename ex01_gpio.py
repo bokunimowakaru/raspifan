@@ -11,7 +11,7 @@
 
 port = 14                                       # GPIO ポート番号=14 (8番ピン)
 
-from RPi import GPIO                            # GPIOモジュールの取得
+from RPi import GPIO                            # GPIOクラスメソッドの取得
 GPIO.setmode(GPIO.BCM)                          # ポート番号の指定方法の設定
 GPIO.setup(port, GPIO.OUT)                      # ポートportのGPIOを出力に設定
 

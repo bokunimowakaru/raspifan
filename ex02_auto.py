@@ -13,8 +13,8 @@ port = 14                                       # GPIO ポート番号 = 14 (8�
 temp_fan_on = 60                                # ファンをONにする温度
 temp_fan_off = 55                               # ファンをOFFにする温度
 
-from RPi import GPIO                            # GPIOモジュールの取得
-from time import sleep                          # スリープ実行モジュールの取得
+from RPi import GPIO                            # GPIOクラスメソッドの取得
+from time import sleep                          # スリープ実行関数の取得
 GPIO.setmode(GPIO.BCM)                          # ポート番号の指定方法の設定
 GPIO.setup(port, GPIO.OUT)                      # ポートportのGPIOを出力に設定
 
@@ -26,10 +26,10 @@ try:                                            # キー割り込みの監視を
         temp = float(fp.read()) / 1000          # ファイルを読み込み1000で除算
         fp.close()                              # ファイルを閉じる
         print('Temperature =', round(temp,1), end=', ') # 温度を表示する
-        if temp >= temp_fan_on:
-            val = 1
-        if temp <= temp_fan_off:
-            val = 0
+        if temp >= temp_fan_on:                 # CPU温度が60℃以上のとき
+            val = 1                             # GPIO 制御値用の変数valを1に
+        if temp <= temp_fan_off:                # CPU温度が55℃以下のとき
+            val = 0                             # GPIO 制御値用の変数valを0に
         print('GPIO'+str(port),'=',str(val))    # ポート番号と変数valの値を表示
         GPIO.output(port, val)                  # 変数valの値をGPIO出力
         sleep(5)                                # 5秒間の待ち時間処理
