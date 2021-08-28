@@ -23,12 +23,24 @@ Tower Pro製 マイクロ・サーボモータSG90をキーボードから入力
 予め設定した速度でサーボモータを定速回転させ、入力した角度の位置で止めます。
 回転速度を下げることで回転中の消費電流を減らすことが出来ます。  
 
-### Example 7 HTTP Server for Servo PWM Control (ex07_http_serv.py)
+### Example 7 HTTP Server for Servo PWM Control (ex07_http_serv.py)  
 サーボモータをインターネット・ブラウザ等から入力した角度の位置に回転して合わせます。  
 
-### Example 8 Heat Dissipation Mechanism for Raspberry Pi (ex08_emission.py)
+### Example 8 Heat Dissipation Mechanism for Raspberry Pi (ex08_emission.py)  
 CPU温度が60℃を超えたときに サーボモータを制御し、ケースの上蓋を開いて排熱します。
 また、インターネット・ブラウザ等から開閉制御を行うことも出来ます。  
+
+## その他のツール  
+
+### 分度器 protractor.pdf  
+右回りの角度値をプロットした分度器の画像ファイルです。
+紙に印刷したものをサーボに取り付けて、回転角度を確認することが出来ます。  
+
+### pwm_tester.py  
+キーボードから0⏎〜100⏎を入力すると入力に応じたディーティ比でPWMを出力します。  
+
+### fan_tester.py  
+CPUファン制御用のパラメータを変化させて、それぞれの制御の動作確認が出来ます。  
 
 ## 保存先
 
