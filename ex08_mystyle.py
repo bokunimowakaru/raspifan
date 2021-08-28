@@ -3,6 +3,8 @@
 ###############################################################################
 # Example 8 Heat Dissipation Mechanism for Raspberry Pi
 #
+# MyStyle IoT Servo
+#
 #                        Copyright (c) 2021 Wataru KUNINO https://bokunimo.net/
 ###############################################################################
 
@@ -82,12 +84,13 @@ def wsgi_app(environ, start_response):          # HTTPアクセス受信時の�
     html = '<html>\n<head>\n'                   # HTMLコンテンツを作成
     html += '<meta http-equiv="refresh" content="10;URL=/">\n' # 自動更新
     html += '</head>\n<body>\n'                 # 以下はHTML本文
+    html += '<h1>MyStyle IoT Servo</h1>\n'      # タイトル
     html += '<table border=1>\n'                # 作表を開始
     html += '<tr><th>項目</th><th width=50>値</th>' # 「項目」「値」を表示
     html += '<th width=200>グラフ</th>\n'       # 「グラフ」を表示
     html += barChart('CPU温度(℃)', temp, 80)   # 温度値を棒グラフ化
     html += barChart('ケース状態', int(cover_status == cover_opened_deg), 1) 
-    # html += barChart('サーボ角(°)', cover_status, 180)  # 現在の角度を表示
+    html += barChart('サーボ角(°)', cover_status, 180)  # 現在の角度を表示
     html += '</tr>\n</table>\n'                 # 作表の終了
     html += 'ケース制御 <a href="/?=0">閉じる</a> <a href="/?=1">開く</a>'
     html += '</body>\n</html>\n'                # htmlの終了
@@ -118,9 +121,14 @@ try:
     thread.start()                              # httpdの起動
     while thread.is_alive:                      # 永久ループ
         temp = getTemp()                        # 温度値を取得
-        if temp >= temp_emit_on and cover_status == cover_closed_deg:
-        # 放出温度に達していて、かつケースが閉じていた時
+        if temp >= temp_emit_on:
+        # 放出温度に達したとき
+            if cover_status == cover_closed_deg: #ケースが閉じていた時
                 coverCtrl(cover_opened_deg)     # ケースを開く
+            else:                               # ケースが開いていた時
+                coverCtrl(cover_closed_deg)     # ケースを閉じる
+            sleep(5)                            # 5秒間の待ち時間処理
+            continue                            # 繰り返し処理に戻る
         if temp <= temp_emit_off and cover_status == cover_opened_deg:
         # 放出停止温度以下、かつケースが開いていた時
                 coverCtrl(cover_closed_deg)     # ケースを閉じる
@@ -135,7 +143,7 @@ except KeyboardInterrupt:                       # キー割り込み発生時
 pi@raspberrypi:~ $ git clone https://bokunimo.net/git/raspifan ⏎
 　～～～～～～～～～～～～～～～～～～(省略)～～～～～～～～～～～～～～～～～
 pi@raspberrypi:~ $ cd raspifan ⏎
-pi@raspberrypi:~/raspifan $ ./ex08_emission.py ⏎
+pi@raspberrypi:~/raspifan $ ./ex08_mystyle.py ⏎
 overCtrl : 150 -> 150
 CPU Temperature = 58.0
 HTTP port 8080
@@ -162,6 +170,10 @@ CPU Temperature = 57.5
 CPU Temperature = 59.1
 CPU Temperature = 58.5
 CPU Temperature = 59.6
+CPU Temperature = 60.1
+coverCtrl : 150 -> 90
+CPU Temperature = 60.1
+coverCtrl : 90 -> 150
 CPU Temperature = 60.1
 coverCtrl : 150 -> 90
 ^C
