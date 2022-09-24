@@ -15,8 +15,8 @@
 # 終了するには[Ctrl]キーを押しながら[C]を押してください。
 
 port = 14                                       # GPIO ポート番号=14 (8番ピン)
-duty_min = 2.7                                  # 180°のときのPWMのDuty比
-duty_max = 13.0                                 # 0°のときのPWMのDuty比
+duty_min = 3.0                                  # 180°のときのPWMのDuty比
+duty_max = 11.8                                 # 0°のときのPWMのDuty比
 
 from wsgiref.simple_server import make_server   # HTTPサーバ用モジュールの取得
 from RPi import GPIO                            # GPIOモジュールの取得
