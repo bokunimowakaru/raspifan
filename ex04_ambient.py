@@ -51,6 +51,7 @@ body_dict = {'writeKey':ambient_wkey, 'd1':None,'d2':None}
 duty = 0                                        # PWM制御値(Duty比) 0～100
 
 try:                                            # キー割り込みの監視を開始
+  while True:
     temp = 0                                    # 温度を保持する変数tempを生成
     for i in range(period):                     # 繰り返し処理(回数=period)
         fp = open(filename)                     # 温度ファイルを開く
